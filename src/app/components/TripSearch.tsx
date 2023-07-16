@@ -1,12 +1,13 @@
 "use client";
 
+import Button from "./Button";
 import CurrencyInput from "./CurrencyInput";
 import DatePicker from "./DatePicker";
 import Input from "./Input";
 
 export default function TripSearch() {
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 bg-search-background bg-cover bg-center bg-no-repeat">
       <h1 className="font-semibold text-2xl text-primaryDarker text-center">
         Encontre sua próxima <span className="text-primary">viagem!</span>
       </h1>
@@ -17,6 +18,7 @@ export default function TripSearch() {
           <DatePicker placeholder="Data de ida" className="w-full" onChange={()=> ''}/>
           <CurrencyInput placeholder="Orçamento"/>
         </div>
+        <Button>Buscar</Button>
       </div>
     </div>
   );
