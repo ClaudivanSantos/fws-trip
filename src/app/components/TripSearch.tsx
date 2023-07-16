@@ -1,5 +1,6 @@
 "use client";
 
+import CurrencyInput from "./CurrencyInput";
 import DatePicker from "./DatePicker";
 import Input from "./Input";
 
@@ -10,11 +11,11 @@ export default function TripSearch() {
         Encontre sua próxima <span className="text-primary">viagem!</span>
       </h1>
       <div className="flex flex-col gap-4 mt-5">
-        <Input placeholder="Onde você quer ir"/>
+        <Input placeholder="Onde você quer ir" />
 
         <div className="flex gap-4">
-        <DatePicker placeholder="Data de ida"/>
-        <DatePicker placeholder="Orçamento"/>
+          <DatePicker placeholder="Data de ida" className="w-full" onChange={()=> ''}/>
+          <CurrencyInput placeholder="Orçamento"/>
         </div>
       </div>
     </div>
