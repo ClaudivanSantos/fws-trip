@@ -1,6 +1,6 @@
 
 
-export default function Home() {
+export default function Loading() {
   return (
     <div >
       <h2>Carregando...</h2>

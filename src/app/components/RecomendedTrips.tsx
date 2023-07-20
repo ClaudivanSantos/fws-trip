@@ -1,10 +1,16 @@
 import { Trip } from "@prisma/client";
 import TripItem from "./TripItem";
+import { useState } from "react";
+import { prisma } from "@/lib/prisma";
+
+async function geTrips() {
+  const trips = await prisma.trip.findMany({});
+  
+  return trips;
+}
 
 const RecomendedTrips = async () => {
-  const data = await fetch("http://localhost:3000/api").then((res) =>
-    res.json()
-  );
+  const data = await geTrips();
   return (
     <div className="container mx-auto p5">
       <div className="flex items-center">
@@ -13,11 +19,10 @@ const RecomendedTrips = async () => {
           Destinos recomendados
         </h2>
         <div className="w-full h-[1px] bg-grayLighter"></div>
-        
       </div>
       <div className="flex flex-col items-center mt-5 gap-5">
-      {data.map((trip: Trip) => (
-          <TripItem key={trip.id} trip={trip}/>
+        {data.map((trip: Trip) => (
+          <TripItem key={trip.id} trip={trip} />
         ))}
       </div>
     </div>
