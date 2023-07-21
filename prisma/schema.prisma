@@ -15,7 +15,7 @@ model Trip {
   id                  String            @id @default(uuid())
   name                String
   location            String
-  locationDescription String            @default("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
+  locationDescription String            @default("Uma cidade encantadora que combina harmoniosamente história, cultura e modernidade. Localizada em um vale pitoresco, cercado por majestosas montanhas e banhado por um rio sereno, Aurelia é um destino que cativa seus visitantes com sua beleza e charme.")
   startDate           DateTime
   endDate             DateTime
   pricePerDay         Decimal           @db.Decimal(8, 2)
