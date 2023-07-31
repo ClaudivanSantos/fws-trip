@@ -19,6 +19,7 @@ export function TripReservation({ trip }: TripReservationProps) {
   const {
     register,
     control,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<TripReservationForm>();
@@ -26,6 +27,9 @@ export function TripReservation({ trip }: TripReservationProps) {
   const onSubmit = (data: any) => {
     console.log(data);
   };
+
+  const startDate = watch("startDate");
+  const endDate = watch("endDate");
 
   return (
     <div className="flex flex-col px-5 pb-10 border-b border-l-grayLighter">
@@ -45,14 +49,14 @@ export function TripReservation({ trip }: TripReservationProps) {
               placeholder="Data de Início"
               error={!!errors?.startDate}
               errorMessage={errors?.startDate?.message}
-              onChange={
-                field.onChange
-              }
+              onChange={field.onChange}
               selected={field.value}
+              minDate={trip.startDate}
+              maxDate={endDate ?? trip.endDate}
             />
           )}
         />
-        
+
         <Controller
           name="endDate"
           rules={{
@@ -64,15 +68,15 @@ export function TripReservation({ trip }: TripReservationProps) {
           control={control}
           render={({ field }) => (
             <DatePicker
-          className="w-full"
-          placeholder="Data final"
-          error={!!errors?.endDate}
+              className="w-full"
+              placeholder="Data final"
+              error={!!errors?.endDate}
               errorMessage={errors?.endDate?.message}
-              onChange={
-                field.onChange
-              }
+              onChange={field.onChange}
               selected={field.value}
-        />
+              maxDate={trip.endDate}
+              minDate={startDate ?? trip.startDate}
+            />
           )}
         />
       </div>
