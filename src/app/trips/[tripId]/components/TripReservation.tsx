@@ -128,6 +128,10 @@ export function TripReservation({ trip }: TripReservationProps) {
             value: true,
             message: "Número de hóspedes é obrigatório",
           },
+          max:{
+            value: trip.maxGuests,
+            message: `Número de hóspedes não pode ser maior que ${trip.maxGuests}`
+          }
         })}
         className="mt-4"
         placeholder={`Numero de hóspedes (max: ${trip.maxGuests})`}
