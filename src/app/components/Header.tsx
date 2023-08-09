@@ -15,7 +15,7 @@ export default function Header() {
     signOut();
   };
   return (
-    <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center shadow-2xl">
+    <div className="container mx-auto p-5 py-0 h-[93px] flex justify-between items-center ">
       <Link href="/">
       <div className="relative h-[32px] w-[182px]">
         <Image src="/logo.png" alt="Logo da Full Stack Week" fill />
