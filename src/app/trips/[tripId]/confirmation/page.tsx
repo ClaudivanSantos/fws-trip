@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import Button from "@/app/components/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function TripConfirmation({
   params,
@@ -19,15 +20,39 @@ export default function TripConfirmation({
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const {status} = useSession()
+  const { status, data } = useSession();
 
   const searchParams = useSearchParams();
 
   const startDate = searchParams.get("startDate");
   const endDate = searchParams.get("endDate");
-  const guests = searchParams.get("guests");
+  const guests = Number(searchParams.get("guests"));
+
+  const handleClick = async () => {
+    const res = await fetch("http://localhost:3000/api/trips/reservation", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          tripId: params.tripId,
+          startDate: startDate,
+          endDate: endDate,
+          guests: guests,
+          userId: (data?.user as any)?.id,
+          totalPaid: totalPrice
+        })
+      ),
+    });
+    if (!res.ok){
+      toast.error("Erro ao realizar reserva")
+      
+    }
+    router.push("/")
+    
+    toast.success("Reserva realizada com sucesso")
+   
+  };
 
   useEffect(() => {
     const fetchTrip = async () => {
@@ -41,12 +66,18 @@ export default function TripConfirmation({
       });
       const { trip, totalPrice } = await response.json();
 
+      if (!trip || !totalPrice) {
+        return router.push("/");
+      }
+
       setTrip(trip);
       setTotalPrice(totalPrice);
     };
 
-    if (status === "unauthenticated"){
-      router.push('/')
+    if (status === "unauthenticated") {
+      router.push("/");
+      toast.error("Faça seu login para continuar")
+      
     }
     fetchTrip();
   }, [status]);
@@ -55,6 +86,7 @@ export default function TripConfirmation({
 
   return (
     <div className="container mx-auto p-5">
+      <Toaster position="bottom-left" reverseOrder={false} />
       <h1 className="font-semibold text-xl text-primaryDarker">Sua viagem</h1>
       {/* Card */}
       <div className="flex flex-col p-5 mt-5 border-grayLighter border-solid border shadow-lg rounded-lg">
@@ -108,7 +140,7 @@ export default function TripConfirmation({
         <h3 className="font-semibold mt-5">Hóspedes</h3>
         <p>{guests} hóspedes</p>
 
-        <Button className="mt-5">Finalizar compra</Button>
+        <Button className="mt-5" onClick={handleClick}>Finalizar compra</Button>
       </div>
     </div>
   );
