@@ -9,7 +9,7 @@
 
 ## 📫 Visualização do projeto
 
-<img size='100%' src=".github/fsw-trips.png" alt="screen" border="0">
+<img size='100%' src=".github/fswtrips.png" alt="screen" border="0">
 
 ## 💻 Projeto
 O projeto foi criado no evento Full Stack Week onde foi desenvolvido um site de reserva de pedidos 
