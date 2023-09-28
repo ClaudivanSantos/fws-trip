@@ -12,7 +12,7 @@
 <img size='100%' src=".github/fswtrips.png" alt="screen" border="0">
 
 ## 💻 Projeto
-O projeto foi criado no evento Full Stack Week onde foi desenvolvido um site de reserva de pedidos 
+O FSW Trips é um projeto desenvolvido durante o curso Full Stack Week (FSW). Trata-se de uma plataforma de reserva de viagens que utiliza tecnologias como Next.js e PostgreSQL para oferecer aos usuários a capacidade de fazer login, pesquisar e fazer reservas de viagens de forma eficiente, ele foi desenvolvido com o objetivo de demonstrar minhas habilidades em desenvolvimento com Next.js. 
 
 
 ## 🤝 Como executar
